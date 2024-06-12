@@ -5,19 +5,35 @@ order: 1
 
 # Quick Start
 
-This guide will get you familiar with the basic plumbing required to run a Remix app as quickly as possible. While there are many starter templates with different runtimes, deploy targets, and databases, we're going to create a bare-bones project from scratch.
+This guide will get you familiar with the basic plumbing required to run a Remix app as quickly as possible.
+While there are many starter templates with different runtimes, deploy targets, and databases, we're going to create a bare-bones project from scratch.
 
-When you're ready to get serious about your Remix project, you might consider starting with a community template. They include TypeScript setups, databases, testing harnesses, authentication, and more. You can find a list of community templates on the [Remix Resources][templates] page.
+このガイドでは、Remixアプリをできるだけ早く実行するために必要な基本的な操作方法を説明します。
+様々なランタイム、デプロイターゲット、データベースを持つスターターテンプレートがありますが、ここではゼロからベアボーンプロジェクトを作成します。
+
+When you're ready to get serious about your Remix project, you might consider starting with a community template.
+They include TypeScript setups, databases, testing harnesses, authentication, and more.
+You can find a list of community templates on the [Remix Resources][templates] page.
+
+Remixプロジェクトに本格的に取り組む準備ができたら、コミュニティテンプレートから始めることを検討してみてください。
+コミュニティテンプレートには、TypeScriptのセットアップ、データベース、テストハーネス、認証などが含まれています。
+コミュニティテンプレートの一覧は[Remix Resources][templates]ページにあります。
 
 ## Installation
 
 If you prefer to initialize a batteries-included Remix project, you can use the [`create-remix` CLI][create-remix]:
 
+バッテリーをインクルードしたRemixプロジェクトを初期化したい場合は、[`create-remix` CLI][create-remix]を使ってください:
+
 ```shellscript nonumber
 npx create-remix@latest
 ```
 
-However, this guide will explain everything the CLI does to set up your project, and instead of using the CLI you can follow these steps. If you're just getting started with Remix, we recommend following this guide to understand all of the different pieces that make up a Remix app.
+However, this guide will explain everything the CLI does to set up your project, and instead of using the CLI you can follow these steps.
+If you're just getting started with Remix, we recommend following this guide to understand all of the different pieces that make up a Remix app.
+
+しかし、このガイドではCLIがプロジェクトをセットアップするために行うすべてのことを説明します。
+Remixを使い始めたばかりであれば、このガイドに従ってRemixアプリを構成する様々な要素を理解することをお勧めします。
 
 ```shellscript nonumber
 mkdir my-remix-app
@@ -37,7 +53,11 @@ npm i -D @remix-run/dev vite
 touch vite.config.js
 ```
 
-Since Remix uses [Vite], you'll need to provide a [Vite config][vite-config] with the Remix Vite plugin. Here's the basic configuration you'll need:
+Since Remix uses [Vite], you'll need to provide a [Vite config][vite-config] with the Remix Vite plugin.
+Here's the basic configuration you'll need:
+
+Remixは[Vite]を使用しているので、Remix Viteプラグインで[Vite config][vite-config]を提供する必要があります。
+以下に必要な基本設定を示します：
 
 ```js filename=vite.config.js
 import { vitePlugin as remix } from "@remix-run/dev";
@@ -55,7 +75,14 @@ mkdir app
 touch app/root.jsx
 ```
 
-`app/root.jsx` is what we call the "Root Route". It's the root layout of your entire app. Here's the basic set of elements you'll need for any project:
+`app/root.jsx` is what we call the "Root Route".
+It's the root layout of your entire app.
+Here's the basic set of elements you'll need for any project:
+
+`app/root.jsx`はいわゆる「Root Route」です。
+アプリ全体のルートレイアウトです。
+どのプロジェクトにも必要な基本的な要素のセットです:
+
 
 ```jsx filename=app/root.jsx
 import {
@@ -200,6 +227,8 @@ First, as a convenience, add `dev` and `start` commands in `package.json` that w
 👉 **Add Vite development middleware to your server**
 
 Vite middleware is not applied if `process.env.NODE_ENV` is set to `"production"`, in which case you'll still be running the regular build output as you did earlier.
+
+Vite ミドルウェアは `process.env.NODE_ENV` が `"production"` に設定されている場合には適用されず、先ほどと同じように通常のビルド出力が実行されます。
 
 ```js filename=server.js lines=[4-11,14-18,20-25]
 import { createRequestHandler } from "@remix-run/express";

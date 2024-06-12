@@ -4,11 +4,25 @@ title: Form
 
 # `<Form>`
 
-A progressively enhanced HTML [`<form>`][form_element] that submits data to actions via `fetch`, activating pending states in `useNavigation` which enables advanced user interfaces beyond a basic HTML form. After a form's action completes, all data on the page is automatically revalidated from the server to keep the UI in sync with the data.
+A progressively enhanced HTML [`<form>`][form_element] that submits data to actions via `fetch`, activating pending states in `useNavigation` which enables advanced user interfaces beyond a basic HTML form.
+After a form's action completes, all data on the page is automatically revalidated from the server to keep the UI in sync with the data.
 
-Because it uses the HTML form API, server rendered pages are interactive at a basic level before JavaScript loads. Instead of Remix managing the submission, the browser manages the submission as well as the pending states (like the spinning favicon). After JavaScript loads, Remix takes over enabling web application user experiences.
+基本的な HTML フォームを超えた高度なユーザーインターフェイスを可能にする `useNavigation` の保留中のステートメントをアクティブにし、`fetch` を介してアクションにデータを送信する、漸進的に拡張された HTML [`<form>`][form_element] です。
+フォームのアクションが完了すると、ページ上のすべてのデータがサーバーから自動的に再検証され、UI とデータの同期が保たれます。
 
-Form is most useful for submissions that should also change the URL or otherwise add an entry to the browser history stack. For forms that shouldn't manipulate the browser history stack, use [`<fetcher.Form>`][fetcher_form].
+Because it uses the HTML form API, server rendered pages are interactive at a basic level before JavaScript loads.
+Instead of Remix managing the submission, the browser manages the submission as well as the pending states (like the spinning favicon).
+After JavaScript loads, Remix takes over enabling web application user experiences.
+
+HTMLフォームAPIを使用するため、JavaScriptがロードされる前に、サーバでレンダリングされたページは基本的なレベルでインタラクティブになります。
+Remixが投稿を管理する代わりに、ブラウザが投稿と保留ステート（回転するファビコンのような）を管理します。
+JavaScriptがロードされた後、RemixはWebアプリケーションのユーザー体験を可能にします。
+
+Form is most useful for submissions that should also change the URL or otherwise add an entry to the browser history stack.
+For forms that shouldn't manipulate the browser history stack, use [`<fetcher.Form>`][fetcher_form].
+
+フォームは、URLを変更したり、ブラウザの履歴スタックにエントリを追加したりする送信に最も便利です。
+ブラウザの履歴スタックを操作しないフォームには、[`<fetcher.Form>`][fetcher_form]を使用してください。
 
 ```tsx
 import { Form } from "@remix-run/react";

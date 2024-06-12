@@ -6,6 +6,8 @@ title: Outlet
 
 Renders the matching child route of a parent route.
 
+親ルートと一致する子ルートをレンダリングします。
+
 ```tsx
 import { Outlet } from "@remix-run/react";
 

@@ -6,6 +6,8 @@ title: Link
 
 A `<a href>` wrapper to enable navigation with client-side routing.
 
+クライアントサイドルーティングによるナビゲーションを可能にする `<a href>` ラッパーです。
+
 ```tsx
 import { Link } from "@remix-run/react";
 

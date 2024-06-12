@@ -6,6 +6,8 @@ title: NavLink
 
 Wraps [`<Link>`][link-component] with additional props for styling active and pending states.
 
+[`<Link>`][link-component]を、アクティブと保留のステートをスタイリングするための追加のプロップでラップします。
+
 ```tsx
 import { NavLink } from "@remix-run/react";
 

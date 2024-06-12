@@ -11,11 +11,21 @@ There are two main ways to manage CSS files in Remix:
 
 This guide covers the pros and cons of each approach, and provides some recommendations based on your project's specific needs.
 
+このガイドでは、各アプローチの長所と短所を説明し、プロジェクト固有のニーズに基づいた推奨事項を示します。
+
 ## CSS bundling
 
-CSS bundling is the most common approach for managing CSS files in the React community. In this model, styles are treated as module side effects and are bundled into one or more CSS files at the discretion of the bundler. It's simpler to use, requires less boilerplate, and gives the bundler more power to optimize the output.
+CSS bundling is the most common approach for managing CSS files in the React community.
+In this model, styles are treated as module side effects and are bundled into one or more CSS files at the discretion of the bundler.
+It's simpler to use, requires less boilerplate, and gives the bundler more power to optimize the output.
+
+CSS バンドルは、React コミュニティで CSS ファイルを管理するための最も一般的なアプローチです。
+このモデルでは、スタイルはモジュールの副作用として扱われ、bundler の裁量で 1 つ以上の CSS ファイルにバンドルされます。
+使い方がシンプルで、定型文が少なくて済み、bundler に出力を最適化する力を与えます。
 
 For example, let's say you have a basic `Button` component with some styles attached to it:
+
+例えば、基本的な`Button`コンポーネントがあり、それにいくつかのスタイルが付加されているとします:
 
 ```css filename=components/Button.css
 .Button__root {
@@ -48,9 +58,19 @@ When consuming this component, you don't have to worry about managing individual
 
 Some approaches to managing CSS files requires the use of bundled CSS.
 
-For example, [CSS Modules][css-modules] is built on the assumption that CSS is bundled. Even though you're explicitly importing the CSS file's class names as a JavaScript object, the styles themselves are still treated as a side effect and automatically bundled into the output. You have no access to the underlying URL of the CSS file.
+CSSファイルを管理するアプローチの中には、バンドルされたCSSを使用する必要があるものがあります。
+
+For example, [CSS Modules][css-modules] is built on the assumption that CSS is bundled.
+Even though you're explicitly importing the CSS file's class names as a JavaScript object, the styles themselves are still treated as a side effect and automatically bundled into the output.
+You have no access to the underlying URL of the CSS file.
+
+例えば、[CSS Modules][css-modules] は CSS がバンドルされていることを前提に作られています。
+CSS ファイルのクラス名を JavaScript オブジェクトとして明示的にインポートしていても、スタイル自体は副作用として扱われ、自動的に出力にバンドルされます。
+CSS ファイルのunderlyingなURLにはアクセスできません。
 
 Another common use case where CSS bundling is required is when you're using a third-party component library that imports CSS files as side effects and relies on your bundler to handle them for you, such as [React Spectrum][react-spectrum].
+
+CSS のバンドルが必要なもう一つの一般的な使用例は、[React Spectrum][react-spectrum] のような、CSS ファイルを副作用としてインポートし、バンドルに処理を任せるサードパーティのコンポーネントライブラリを使用している場合です。
 
 #### CSS order can differ between development and production
 
