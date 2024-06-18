@@ -6,15 +6,35 @@ title: Regular CSS
 
 Remix helps you scale an app with regular CSS with nested routes and [`links`][links].
 
-CSS Maintenance issues can creep into a web app for a few reasons. It can get difficult to know:
+Remixはネストされたルートと[`links`][links]を持つ通常のCSSでアプリを拡張するのに役立ちます。
+
+CSS Maintenance issues can creep into a web app for a few reasons.
+It can get difficult to know:
+
+CSSのメンテナンスの問題は、いくつかの理由でWebアプリに忍び寄ることがあります。
+以下のことを知るのは、難しいのです:
 
 - how and when to load CSS, so it was usually all loaded on every page
 - if the class names and selectors you were using were accidentally styling other UI in the app
 - if some rules weren't even used anymore as the CSS source code grew over time
 
-Remix alleviates these issues with route-based stylesheets. Nested routes can each add their own stylesheets to the page and Remix will automatically prefetch, load, and unload them with the route. When the scope of concern is limited to just the active routes, the risks of these problems are reduced significantly. The only chances for conflicts are with the parent routes' styles (and even then, you will likely see the conflict since the parent route is also rendering).
+- いつ、どのようにCSSを読み込めばよいのかがわからなくなります。
+- 使用していたクラス名やセレクタが、誤ってアプリ内の他のUIをスタイリングしていた場合
+- CSSのソースコードが時間の経過とともに大きくなり、一部のルールが使われなくなった場合
+
+Remix alleviates these issues with route-based stylesheets.
+Nested routes can each add their own stylesheets to the page and Remix will automatically prefetch, load, and unload them with the route.
+When the scope of concern is limited to just the active routes, the risks of these problems are reduced significantly.
+The only chances for conflicts are with the parent routes' styles (and even then, you will likely see the conflict since the parent route is also rendering).
+
+Remixはルートベースのスタイルシートでこれらの問題を軽減します。
+ネストされたルートはそれぞれ独自のスタイルシートをページに追加でき、Remixは自動的にルートと一緒にスタイルシートをプリフェッチ、ロード、アンロードします。
+問題の範囲がアクティブなルートだけに限定されるとき、これらの問題のリスクは大幅に減少します。
+コンフリクトの可能性があるのは親ルートのスタイルだけです（その場合でも、親ルートもレンダリングしているので、コンフリクトが発生する可能性が高いです）。
 
 <docs-warning>If you're using the [Classic Remix Compiler][classic-remix-compiler] rather than [Remix Vite][remix-vite], you should remove `?url` from the end of your CSS import paths.</docs-warning>
+
+<docs-warning>[Remix Vite][remix-vite]ではなく、[Classic Remix Compiler][classic-remix-compiler]を使用している場合は、CSSインポートパスの末尾から`?url` を削除してください。</docs-warning>
 
 ### Route Styles
 
@@ -62,11 +82,21 @@ It's subtle, but this little feature removes a lot of the difficulty when stylin
 
 ### Shared Component Styles
 
-Websites large and small usually have a set of shared components used throughout the rest of the app: buttons, form elements, layouts, etc. When using plain style sheets in Remix there are two approaches we recommend.
+Websites large and small usually have a set of shared components used throughout the rest of the app: buttons, form elements, layouts, etc.
+When using plain style sheets in Remix there are two approaches we recommend.
+
+ウェブサイトの大小を問わず、通常、ボタン、フォーム要素、レイアウトなど、アプリ全体で使用される共有コンポーネントがあります。
+Remixでプレーンスタイルシートを使用する場合、2つのアプローチを推奨します。
 
 #### Shared stylesheet
 
-The first approach is very simple. Put them all in a `shared.css` file included in `app/root.tsx`. That makes it easy for the components themselves to share CSS code (and your editor to provide intellisense for things like [custom properties][custom-properties]), and each component already needs a unique module name in JavaScript anyway, so you can scope the styles to a unique class name or data attribute:
+The first approach is very simple.
+Put them all in a `shared.css` file included in `app/root.tsx`.
+That makes it easy for the components themselves to share CSS code (and your editor to provide intellisense for things like [custom properties][custom-properties]), and each component already needs a unique module name in JavaScript anyway, so you can scope the styles to a unique class name or data attribute:
+
+最初の方法はとても簡単です。
+`app/root.tsx`に含まれる`shared.css`ファイルにそれらをすべて置きます。
+そうすることで、コンポーネント自身がCSSコードを共有しやすくなりますし（エディタが[カスタムプロパティ][custom-properties]のようなもののためのインテリセンスを提供します）、各コンポーネントはすでにJavaScriptでユニークなモジュール名を必要としているので、ユニークなクラス名やデータ属性にスタイルをスコープすることができます:
 
 ```css filename=app/styles/shared.css
 /* scope with class names */
@@ -78,8 +108,8 @@ The first approach is very simple. Put them all in a `shared.css` file included 
   /* ... */
 }
 
-/* or scope with data attributes to avoid concatenating
-   className props, but it's really up to you */
+/* or scope with data attributes to avoid concatenating className props, but it's really up to you */
+/* あるいは、classNameプロップの連結を避けるためにdata属性を持つスコープを使うこともできますが、それはあなた次第です。*/
 [data-primary-button] {
   /* ... */
 }
@@ -91,7 +121,13 @@ The first approach is very simple. Put them all in a `shared.css` file included 
 
 While this file may become large, it'll be at a single URL that will be shared by all routes in the app.
 
-This also makes it easy for routes to adjust the styles of a component without needing to add an official new variant to the API of that component. You know it won't affect the component anywhere but the `/accounts` routes.
+このファイルは大きくなるかもしれませんが、アプリのすべてのルートで共有される単一のURLになります。
+
+This also makes it easy for routes to adjust the styles of a component without needing to add an official new variant to the API of that component.
+You know it won't affect the component anywhere but the `/accounts` routes.
+
+これはまた、コンポーネントの API に公式の新しいバリアントを追加することなく、ルートがコンポーネントのスタイルを調整することを簡単にします。
+コンポーネントは `/accounts` ルート以外には影響しません。
 
 ```css filename=app/styles/accounts.css
 .PrimaryButton {
@@ -103,9 +139,17 @@ This also makes it easy for routes to adjust the styles of a component without n
 
 A second approach is to write individual css files per component and then "surface" the styles up to the routes that use them.
 
+2つ目のアプローチは、コンポーネントごとに個別のcssファイルを記述し、それらを使用するルートまでスタイルを"surface"することです。
+
 Perhaps you have a `<Button>` in `app/components/button/index.tsx` with styles at `app/components/button/styles.css` as well as a `<PrimaryButton>` that extends it.
 
-Note that these are not routes, but they export `links` functions as if they were. We'll use this to surface their styles to the routes that use them.
+例えば、`app/components/button/index.tsx`に`<Button>`があり、`app/components/button/styles.css`にスタイルがあり、それを拡張した`<PrimaryButton>`があるとします。
+
+Note that these are not routes, but they export `links` functions as if they were.
+We'll use this to surface their styles to the routes that use them.
+
+これらはルートではありませんが、あたかもルートであるかのように `links` 関数をエクスポートしていることに注意してください。
+これを使用して、それらを使用するルートにスタイルを表示します。
 
 ```css filename=app/components/button/styles.css
 [data-button] {
@@ -163,9 +207,17 @@ export const PrimaryButton = React.forwardRef(
 PrimaryButton.displayName = "PrimaryButton";
 ```
 
-Note that the primary button's `links` include the base button's links. This way consumers of `<PrimaryButton>` don't need to know its dependencies (just like JavaScript imports).
+Note that the primary button's `links` include the base button's links.
+This way consumers of `<PrimaryButton>` don't need to know its dependencies (just like JavaScript imports).
 
-Because these buttons are not routes, and therefore not associated with a URL segment, Remix doesn't know when to prefetch, load, or unload the styles. We need to "surface" the links up to the routes that use the components.
+プライマリボタンの `links` はベースボタンのリンクを含んでいることに注意してください。
+こうすることで`<PrimaryButton>`のコンシューマは依存関係を知る必要がなくなります（JavaScriptのインポートのように）。
+
+Because these buttons are not routes, and therefore not associated with a URL segment, Remix doesn't know when to prefetch, load, or unload the styles.
+We need to "surface" the links up to the routes that use the components.
+
+これらのボタンはルートではないので、URLセグメントと関連付けられておらず、Remixはいつスタイルをプリフェッチ、ロード、アンロードするかわかりません。
+コンポーネントを使用するルートへのリンクを "表面化 "する必要があります。
 
 Consider that `app/routes/_index.tsx` uses the primary button component:
 
